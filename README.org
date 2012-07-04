@@ -1,0 +1,52 @@
+* Octopress Asides
+
+The right margin of the default [[http://bit.ly/KT1aFT][Octopress]] theme has several compenents that, in Octopressian, are called/asides/. Octopress allows [[http://bit.ly/O5vOeb][customization]] of the asides.
+
+** Social Mention
+[[http://bit.ly/O5wdgv][SocialMention.com]] is a website that provides [[http://bit.ly/O5wwYM][trending]] news from a large number of websites. Besides the service provided by SocialMention.com, they support trending in a [[http://bit.ly/O5x4h7][widget]]. The SocialMention aside provides trending news related to a post as an aside.
+
+***** Live Example
+See [[http://bit.ly/N3kIoS][this posting]].
+
+***** Installation
+1. Add the contents of =socialmention.scss= to =.../octopress-main-directory/sass/custom/_layout.scss= in your Octopress installation. It may be easiest to copy and paste the content of =socialmention.scss= from the [[[raw file].
+2. Copy =socialmention.html= to =.../octopress/source/_includes/custom/asides/=. The directory should exist in your Octopress installation. 
+3. Add =custom/asides/socialmention.html= to the =default_asides= array in your =_config.yml= file. See Octopress's [[http://bit.ly/O5vOeb][insructions]] for changing the sidebar for further instructions on this.
+
+***** Configuration
+By default, pages or posts that do not have SocialMention configured in their [[http://bit.ly/O5Cetx][YAML front matter]] will display as they did before installaton of the SocialMention aside. 
+
+Configuring the SocialMention aside requires the insertion of two new lines in the YAML front matter: one line is the title to show above the SocialMention aside, the other line specifies the SocialMention.com search.
+
+As an example, consider a post about Mozilla's Firefox browser. For this post, we want the the title to be "Mozilla Firefox" and the search to be "firefox". In this case, the additional YAML lines should be:
+#+BEGIN_EXAMPLE
+topic_search:   "firefox"
+topic_title:    "Mozilla Firefox"
+#+END_EXAMPLE 
+Note that the syntax for the search variable must be a legal search on SocialMention.com. The topic is free form text.
+
+***** Advanced Configuration
+A more complex configuration is required for the [[http://bit.ly/N3kIoS][live example]] given above. That posting is about Octopress. As Octopress uses [[http://bit.ly/Jm1bmc][Jekyll]], I chose to have my SocialMention aside include information about either "octopress" or "jekyll".
+
+Being that SocialMention allows the use of =OR=, I inserted these two lines into my YAML front matter:
+#+BEGIN_EXAMPLE
+topic_search:   "octopress OR jekyll"
+topic_title:    "Octopress And Jekyll"
+#+END_EXAMPLE 
+This seemed simple enough until I previewed the page. It didn't occur to me that "jekyll" is the name of a rather famous literary character from the novel [[http://bit.ly/LZaT14][The Strange Case of Dr Jekyll and Mr Hyde]]. My SocialMention aside was filled with references to the character. The page was beter without the SocialMention aside than with it. 
+
+Fortunately, in addition to =OR=, SocialMention supports =AND= as well as parenthesis. Knowing this, I changed the arguments to the SocialMention search to =octopress OR (octopress AND jekyll)=. That is, the SocialMention search will only find references to "octopress" or references to both "octopress" and "jekyll".
+
+You can see the final SocialMention aside in [[http://bit.ly/N3kIoS][this posting]]. The entire YAML front matter for the posting is:
+#+BEGIN_EXAMPLE
+---
+layout:         post
+title:          "Octopress Is Pretty Great"
+date:           2012-05-26 13:32
+comments:       true
+categories:     [blogging-tech, octopress, jekyll]
+topic_search:   octopress OR (octopress AND Jekyll)
+topic_title:    Octopress And Jekyll
+published:      true
+---
+#+END_EXAMPLE
